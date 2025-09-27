@@ -120,7 +120,7 @@
 /* Print styles for PDF generation */
 @media print {
   .invoice-preview {
-    -webkit-print-color-adjust: exact;
-    color-adjust: exact;
+    -webkit-print-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
