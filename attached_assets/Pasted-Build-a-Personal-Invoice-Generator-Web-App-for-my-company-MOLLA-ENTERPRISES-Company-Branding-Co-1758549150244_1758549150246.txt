@@ -1,0 +1,69 @@
+Build a Personal Invoice Generator Web App for my company MOLLA ENTERPRISES.
+
+Company Branding:
+- Company Name: MOLLA ENTERPRISES
+- Address: BAGNAN, HOWRAH, WEST BENGAL 711303
+- Phone: 9681766016
+- Email: abedinmolla1@gmail.com
+- WhatsApp: 9681766016
+- Use premium stylish Google Fonts for header (Poppins / Montserrat).
+- Header design must look like the "Blue Ocean Invoice" template style:
+  - Left: Company Name + Details
+  - Right: "TAX INVOICE" label, Invoice number, Date
+  - Add a blue gradient accent line at the top.
+
+Tech Stack:
+- Frontend: React (Vite + Tailwind CSS)
+- Backend: Node.js + Express
+- Database: MongoDB
+- PDF generation: html2canvas + jsPDF (frontend download) and Puppeteer (backend PDF)
+- Authentication: Not required (single-user personal use)
+
+Features:
+1. Dashboard
+   - Home page shows MOLLA ENTERPRISES branding
+   - Navigation: Clients | Invoices | Settings
+
+2. Clients Module
+   - Add, Edit, Delete, List clients
+   - Save client details in MongoDB
+
+3. Invoice Module
+   - Create invoice:
+     - Select client
+     - Add items (Description, Qty, Rate, Tax, Discount)
+     - **Tax field must be optional (if left blank or 0, tax is not applied).**
+     - Auto-calculates subtotal, tax (if applicable), discount, grand total
+     - Default currency: INR (₹)
+     - Allow override currency: USD, EUR, GBP, etc.
+   - Save invoice in MongoDB
+   - Live preview on frontend (BlueOcean-style design)
+   - Download as PDF (frontend download and backend PDF endpoint)
+   - Invoice status: Draft, Sent, Paid, Overdue
+
+4. Settings Module
+   - Update default currency
+   - Add/Update payment options:
+     - Bank transfer details (Bank Name, Account, IFSC)
+     - UPI ID (displayed as text only; DO NOT generate QR)
+   - These payment details appear in PDF footer (plain text)
+
+5. PDF Design
+   - Professional clean layout like BlueOcean sample
+   - Header: MOLLA ENTERPRISES branding
+   - Client block (Invoice To + Ship To)
+   - Items table (QTY, ITEM, DESCRIPTION, UNIT PRICE, TAX [if applied], AMOUNT)
+   - Totals box aligned right
+   - Footer: Payment Details (Bank + UPI ID as text) + Thank you note
+
+Deployment:
+- Frontend → Vercel
+- Backend → Render
+- Include `.env.example` with MongoDB URI and other configs
+- README with setup and deployment instructions
+
+Developer Notes:
+- Provide 1 sample client + 1 sample invoice as demo
+- Code must be clean and well-commented
+- Fully responsive design
+- Keep the app single-user (no auth) by default
