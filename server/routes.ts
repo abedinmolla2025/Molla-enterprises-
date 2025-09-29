@@ -4,9 +4,22 @@ import { storage } from "./storage";
 import { insertClientSchema, insertInvoiceSchema, insertInvoiceItemSchema, insertSettingsSchema } from "@shared/schema";
 import { z } from "zod";
 
+// Request-specific schemas with proper coercion
+const invoiceRequestSchema = insertInvoiceSchema.extend({
+  date: z.coerce.date(),
+  dueDate: z.coerce.date(),
+});
+
+const invoiceItemRequestSchema = insertInvoiceItemSchema.omit({ invoiceId: true });
+
 const createInvoiceRequestSchema = z.object({
-  invoice: insertInvoiceSchema,
-  items: z.array(insertInvoiceItemSchema),
+  invoice: invoiceRequestSchema,
+  items: z.array(invoiceItemRequestSchema),
+});
+
+const updateInvoiceRequestSchema = z.object({
+  invoice: invoiceRequestSchema.partial(),
+  items: z.array(invoiceItemRequestSchema).optional(),
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -139,7 +152,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.put("/api/invoices/:id", async (req, res) => {
     try {
-      const parsed = createInvoiceRequestSchema.partial().parse(req.body);
+      const parsed = updateInvoiceRequestSchema.parse(req.body);
       const invoice = await storage.updateInvoice(req.params.id, parsed.invoice, parsed.items);
       if (!invoice) {
         return res.status(404).json({ message: "Invoice not found" });

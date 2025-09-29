@@ -19,10 +19,10 @@ import type { Client, InvoiceWithClient, Settings } from "@shared/schema";
 
 const invoiceItemSchema = z.object({
   description: z.string().min(1, "Description is required"),
-  quantity: z.number().min(0.01, "Quantity must be greater than 0"),
-  rate: z.number().min(0, "Rate must be non-negative"),
-  taxRate: z.number().min(0).max(100),
-  discountRate: z.number().min(0).max(100),
+  quantity: z.coerce.number().min(0.01, "Quantity must be greater than 0"),
+  rate: z.coerce.number().min(0, "Rate must be non-negative"),
+  taxRate: z.coerce.number().min(0).max(100),
+  discountRate: z.coerce.number().min(0).max(100),
 });
 
 const invoiceFormSchema = z.object({
@@ -87,8 +87,8 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
       })) || [
         {
           description: "",
-          quantity: 0,
-          rate: 0,
+          quantity: undefined,
+          rate: undefined,
           taxRate: 18,
           discountRate: 0,
         }
@@ -160,8 +160,8 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
       const invoicePayload = {
         ...invoiceData,
         invoiceNumber: nextInvoiceNumber?.invoiceNumber || "INV-0001",
-        date: new Date(data.date).toISOString(),
-        dueDate: new Date(data.dueDate).toISOString(),
+        date: data.date,
+        dueDate: data.dueDate,
         subtotal: subtotal.toString(),
         taxAmount: totalTax.toString(),
         discountAmount: totalDiscount.toString(),
@@ -238,8 +238,8 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
 
       const invoicePayload = {
         ...invoiceData,
-        date: new Date(data.date).toISOString(),
-        dueDate: new Date(data.dueDate).toISOString(),
+        date: data.date,
+        dueDate: data.dueDate,
         subtotal: subtotal.toString(),
         taxAmount: totalTax.toString(),
         discountAmount: totalDiscount.toString(),
@@ -272,8 +272,8 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
   const handleAddItem = () => {
     append({
       description: "",
-      quantity: 0,
-      rate: 0,
+      quantity: undefined,
+      rate: undefined,
       taxRate: 18,
       discountRate: 0,
     });
@@ -343,8 +343,8 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
       id: "preview",
       invoiceNumber: invoice?.invoiceNumber || nextInvoiceNumber?.invoiceNumber || "INV-0001",
       clientId: formData.clientId,
-      date: new Date(formData.date).toISOString(),
-      dueDate: new Date(formData.dueDate).toISOString(),
+      date: formData.date,
+      dueDate: formData.dueDate,
       status: formData.status,
       currency: formData.currency,
       subtotal: subtotal.toString(),
@@ -614,8 +614,8 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
                                     step="0.01"
                                     placeholder="Quantity"
                                     {...field}
-                                    onChange={(e) => field.onChange(parseFloat(e.target.value) || "")}
-                                    value={field.value || ""}
+                                    onChange={(e) => field.onChange(e.target.value)}
+                                    value={field.value ?? ""}
                                     className="text-sm"
                                     data-testid={`input-item-quantity-${index}`}
                                   />
@@ -636,8 +636,8 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
                                     step="0.01"
                                     placeholder="Rate / Price"
                                     {...field}
-                                    onChange={(e) => field.onChange(parseFloat(e.target.value) || "")}
-                                    value={field.value || ""}
+                                    onChange={(e) => field.onChange(e.target.value)}
+                                    value={field.value ?? ""}
                                     className="text-sm"
                                     data-testid={`input-item-rate-${index}`}
                                   />
