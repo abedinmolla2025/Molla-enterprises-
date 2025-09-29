@@ -64,10 +64,10 @@ export default function InvoicePreview({ invoice, className = "" }: InvoicePrevi
         <div className="flex justify-between items-start mb-8">
           <div>
             <div className="mb-4" data-testid="company-name">
-              <h1 className="font-lora text-5xl font-black mb-1 tracking-wide uppercase leading-none">
-                <span className="text-blue-800">MOLLA</span><span className="text-cyan-500">ENTERPRISES</span>
+              <h1 className="font-lora text-6xl font-black mb-1 tracking-wide uppercase leading-none">
+                <span className="text-blue-900 font-black">MOLLA</span><span className="text-cyan-600 font-black">ENTERPRISES</span>
               </h1>
-              <p className="font-lora text-sm font-medium text-gray-700 tracking-widest uppercase">PROFESSIONAL SERVICES</p>
+              <p className="font-lora text-base font-bold text-gray-800 tracking-widest uppercase">PROFESSIONAL SERVICES</p>
             </div>
             <div className="text-sm text-gray-600 space-y-1">
               <p>{companyAddress}</p>
