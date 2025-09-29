@@ -87,7 +87,7 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
       })) || [
         {
           description: "",
-          quantity: 1,
+          quantity: 0,
           rate: 0,
           taxRate: 18,
           discountRate: 0,
@@ -272,7 +272,7 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
   const handleAddItem = () => {
     append({
       description: "",
-      quantity: 1,
+      quantity: 0,
       rate: 0,
       taxRate: 18,
       discountRate: 0,
@@ -343,8 +343,8 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
       id: "preview",
       invoiceNumber: invoice?.invoiceNumber || nextInvoiceNumber?.invoiceNumber || "INV-0001",
       clientId: formData.clientId,
-      date: formData.date,
-      dueDate: formData.dueDate,
+      date: new Date(formData.date).toISOString(),
+      dueDate: new Date(formData.dueDate).toISOString(),
       status: formData.status,
       currency: formData.currency,
       subtotal: subtotal.toString(),
@@ -592,7 +592,7 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
                               <FormItem>
                                 <FormControl>
                                   <Input
-                                    placeholder="Description"
+                                    placeholder="Item Name / Description"
                                     {...field}
                                     className="text-sm"
                                     data-testid={`input-item-description-${index}`}
@@ -612,9 +612,10 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
                                   <Input
                                     type="number"
                                     step="0.01"
-                                    placeholder="Qty"
+                                    placeholder="Quantity"
                                     {...field}
-                                    onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                                    onChange={(e) => field.onChange(parseFloat(e.target.value) || "")}
+                                    value={field.value || ""}
                                     className="text-sm"
                                     data-testid={`input-item-quantity-${index}`}
                                   />
@@ -633,9 +634,10 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
                                   <Input
                                     type="number"
                                     step="0.01"
-                                    placeholder="Rate"
+                                    placeholder="Rate / Price"
                                     {...field}
-                                    onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                                    onChange={(e) => field.onChange(parseFloat(e.target.value) || "")}
+                                    value={field.value || ""}
                                     className="text-sm"
                                     data-testid={`input-item-rate-${index}`}
                                   />
@@ -654,7 +656,7 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
                                   <Input
                                     type="number"
                                     step="0.01"
-                                    placeholder="Tax %"
+                                    placeholder="GST/Tax %"
                                     {...field}
                                     onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
                                     className="text-sm"
@@ -675,7 +677,7 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
                                   <Input
                                     type="number"
                                     step="0.01"
-                                    placeholder="Disc"
+                                    placeholder="Discount %"
                                     {...field}
                                     onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
                                     className="text-sm"
