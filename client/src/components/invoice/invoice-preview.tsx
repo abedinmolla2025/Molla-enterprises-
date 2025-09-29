@@ -63,7 +63,7 @@ export default function InvoicePreview({ invoice, className = "" }: InvoicePrevi
         {/* Company Header */}
         <div className="flex justify-between items-start mb-8">
           <div>
-            <h1 className="font-lora text-4xl font-bold text-blue-800 mb-3" data-testid="company-name">
+            <h1 className="font-lora text-6xl font-black text-blue-800 mb-4 tracking-widest uppercase" data-testid="company-name">
               {companyName}
             </h1>
             <div className="text-sm text-gray-600 space-y-1">

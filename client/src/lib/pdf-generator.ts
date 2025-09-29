@@ -79,7 +79,7 @@ export async function generatePDF(invoice: InvoiceWithClient): Promise<void> {
           <!-- Company Header -->
           <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px;">
             <div>
-              <h1 style="font-family: Lora, serif; font-size: 36px; font-weight: bold; color: #1e40af; margin: 0 0 12px 0; line-height: 1.2;">
+              <h1 style="font-family: Lora, serif; font-size: 54px; font-weight: 900; color: #1e40af; margin: 0 0 16px 0; line-height: 1.1; letter-spacing: 3px; text-transform: uppercase; text-shadow: 0 2px 4px rgba(30, 64, 175, 0.1);">
                 ${companyName}
               </h1>
               <div style="font-size: 12px; color: #6b7280; line-height: 1.5;">
