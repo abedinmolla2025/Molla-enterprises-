@@ -79,9 +79,12 @@ export async function generatePDF(invoice: InvoiceWithClient): Promise<void> {
           <!-- Company Header -->
           <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px;">
             <div>
-              <h1 style="font-family: Lora, serif; font-size: 54px; font-weight: 900; color: #1e40af; margin: 0 0 16px 0; line-height: 1.1; letter-spacing: 3px; text-transform: uppercase; text-shadow: 0 2px 4px rgba(30, 64, 175, 0.1);">
-                ${companyName}
-              </h1>
+              <div style="margin: 0 0 16px 0;">
+                <h1 style="font-family: Lora, serif; font-size: 48px; font-weight: 900; margin: 0; line-height: 0.9; letter-spacing: 1px; text-transform: uppercase;">
+                  <span style="color: #1e40af;">MOLLA</span><span style="color: #06b6d4;">ENTERPRISES</span>
+                </h1>
+                <p style="font-family: Lora, serif; font-size: 14px; font-weight: 500; color: #374151; margin: 4px 0 0 0; letter-spacing: 4px; text-transform: uppercase;">PROFESSIONAL SERVICES</p>
+              </div>
               <div style="font-size: 12px; color: #6b7280; line-height: 1.5;">
                 <p style="margin: 2px 0;">${companyAddress}</p>
                 <p style="margin: 2px 0;">Phone: ${companyPhone} | WhatsApp: ${companyWhatsapp}</p>
