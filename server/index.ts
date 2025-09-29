@@ -2,19 +2,9 @@ import express, { type Request, Response, NextFunction } from "express";
 import net from "net";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
-import { createClient } from "@supabase/supabase-js";
 
 // ======= IPv4 fix =======
 net.setDefaultAutoSelectFamily(false); // force IPv4 globally
-
-// ======= Supabase client =======
-const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_KEY!,
-  {
-    realtime: { params: { eventsPerSecond: 10 } } // optional
-  }
-);
 
 const app = express();
 app.use(express.json());
@@ -83,15 +73,3 @@ app.use((req, res, next) => {
     }
   );
 })();
-
-// ======= Example Supabase fetch helper =======
-export async function fetchInvoices() {
-  try {
-    const { data, error } = await supabase.from("invoices").select("*");
-    if (error) throw error;
-    return data;
-  } catch (err) {
-    log("Error fetching invoices:", err);
-    throw new Error("Failed to fetch invoices");
-  }
-}
