@@ -30,10 +30,10 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-4">
             <div className="text-white">
-              <h1 className="font-lora text-xl font-bold tracking-tight" data-testid="company-name">
+              <h1 className="font-lora text-4xl font-black tracking-wide" data-testid="company-name">
                 MOLLA ENTERPRISES
               </h1>
-              <p className="text-blue-100 text-xs">Invoice Generator</p>
+              <p className="text-blue-100 text-sm font-medium">Professional Invoice Generator</p>
             </div>
           </div>
           
